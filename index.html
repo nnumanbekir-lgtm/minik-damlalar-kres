@@ -117,6 +117,16 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 .ph-tile{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:4px;color:var(--c);font-size:11.5px;font-weight:800;text-align:center;padding:6px;background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(255,255,255,.45) 10px 20px)}
 .ph-tile svg{width:28px;height:28px}
 .pgnote{font-size:13px;color:var(--muted)}
+button.kvl{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+button.kvl.ft{color:#a2a6bd;min-height:44px}button.kvl.ft:hover{color:#fff}
+dialog.kv-d{border:0;padding:0;border-radius:24px;max-width:min(92vw,680px);width:100%;max-height:86vh;background:var(--paper);color:var(--ink)}
+dialog.kv-d::backdrop{background:rgba(20,22,36,.7)}
+.kvb{padding:28px;display:grid;gap:10px;position:relative}
+.kvb h2{font-size:1.6rem;padding-right:52px}
+.kvb h3{font-family:var(--body);font-size:1.02rem;font-weight:800;margin-top:6px}
+.kvb p{color:var(--muted);font-size:15px}
+button.kvx{position:absolute;top:16px;right:16px;background:var(--bg);color:var(--ink)}
+button.kvx:hover{background:var(--line)}
 dialog.lb{border:0;padding:0;background:transparent;max-width:min(92vw,820px);width:100%;color:#fff}
 dialog.lb::backdrop{background:rgba(20,22,36,.82)}
 .lbf{position:relative;border-radius:22px;overflow:hidden;background:#1d1f30;aspect-ratio:4/3;display:grid;place-items:center}
@@ -413,8 +423,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <div class="r2"><div class="f"><label for="pn">Veli adı soyadı</label><input id="pn" autocomplete="name" placeholder="Adınız soyadınız"></div><div class="f"><label for="pt">Telefon</label><input id="pt" type="tel" autocomplete="tel" placeholder="05xx xxx xx xx"></div></div>
 <div class="r2"><div class="f"><label for="cn">Çocuğun adı</label><input id="cn" placeholder="Çocuğunuzun adı"></div><div class="f"><label for="cb">Doğum tarihi</label><input id="cb" type="month"></div></div>
 <div class="r2"><div class="f"><label for="cg">Program</label><select id="cg"><option>Tam gün kreş · 2–3 yaş</option><option>Tam gün · 3–4 yaş</option><option>Tam gün · 4–5 yaş</option><option>Tam gün · 5–6 yaş (ilkokula hazırlık)</option><option>Emin değilim</option><option>Oyun grubu · 12–36 ay</option></select></div><div class="f"><label for="cd">Ne zaman başlamak istersiniz?</label><select id="cd"><option>Hemen</option><option>1–2 ay içinde</option><option>Yeni dönemde</option></select></div></div>
-<div class="f"><label for="nt">Notunuz</label><textarea id="nt" rows="2" placeholder="Alerji, uyum süreci veya merak ettikleriniz"></textarea></div>
-<label class="kv" for="kv"><input type="checkbox" id="kv"><span>Kişisel verilerimin ön kayıt amacıyla işlenmesine ilişkin aydınlatma metnini okudum.</span></label>
+<div class="f"><label for="nt">Notunuz</label><textarea id="nt" rows="2" placeholder="Uyum süreci veya merak ettikleriniz"></textarea></div>
+<label class="kv" for="kv"><input type="checkbox" id="kv"><span>Kişisel verilerimin ön kayıt amacıyla işlenmesine ilişkin <button type="button" class="kvl" data-kvkk>aydınlatma metnini</button> okudum.</span></label>
 <p class="er" id="er" hidden></p>
 <button class="btn" type="submit">Ön kaydı gönder</button>
 <p class="ok" id="ok" hidden></p>
@@ -425,7 +435,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <button type="button" class="lbbtn lbx" id="lbx" aria-label="Kapat">✕</button>
 <div class="lbbar"><button type="button" class="lbbtn" id="lbp" aria-label="Önceki fotoğraf">‹ Önceki</button><span id="lbc" class="num"></span><button type="button" class="lbbtn" id="lbn" aria-label="Sonraki fotoğraf">Sonraki ›</button></div>
 </dialog>
-<footer><div class="wrap"><span>© 2026 Minik Damlalar Kreş ve Gündüz Bakımevi · Çankaya</span><span>KVKK aydınlatma metni</span></div></footer>
+<dialog class="kv-d" id="kvkk" aria-labelledby="kvt">
+<div class="kvb">
+<button type="button" class="lbbtn kvx" id="kvx" aria-label="Kapat">✕</button>
+<h2 id="kvt">Kişisel Verilerin Korunması Aydınlatma Metni</h2>
+<p class="kvn"><span class="ph">Taslak metindir. Yayına almadan önce kreşin hukuk danışmanı tarafından kontrol edilmelidir.</span></p>
+<h3>Veri sorumlusu</h3>
+<p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca veri sorumlusu <span class="ph">kreşin ticari unvanı</span>'dır. Adres: Aydınlar Mah. İğde Cd. No:9/A, Dikmen, Çankaya / Ankara.</p>
+<h3>Hangi verileri işliyoruz?</h3>
+<p>Ön kayıt formunda paylaştığınız veli adı soyadı, telefon numarası, çocuğunuzun adı ve doğum tarihi (ay/yıl), ilgilendiğiniz program, başlangıç tercihiniz ve not alanına yazdıklarınız.</p>
+<p>Lütfen bu formda sağlık bilgisi (alerji, kronik rahatsızlık vb.) paylaşmayın. Bu bilgiler kayıt aşamasında ayrıca ve açık rızanızla alınır.</p>
+<h3>Hangi amaçla?</h3>
+<p>Ön kayıt ve okul gezisi talebinizi değerlendirmek, sizinle iletişime geçmek, kontenjan, program ve ücret bilgisi vermek.</p>
+<h3>Hukuki sebep ve toplama yöntemi</h3>
+<p>Verileriniz bu sitedeki form aracılığıyla elektronik ortamda toplanır ve KVKK md. 5/2-c (bir sözleşmenin kurulmasıyla doğrudan ilgili olması) ile md. 5/2-f (meşru menfaat) hukuki sebeplerine dayanılarak işlenir. Formu gönderdiğinizde bilgileriniz WhatsApp uygulaması üzerinden kreşimize iletilir.</p>
+<h3>Kimlerle paylaşılır?</h3>
+<p>Verileriniz pazarlama amacıyla üçüncü kişilerle paylaşılmaz; yalnızca yasal bir yükümlülük bulunduğunda yetkili kamu kurumlarına aktarılabilir. İletişim için kullanılan mesajlaşma hizmetinin sunucuları yurt dışında bulunabilir. <span class="ph">Yurt dışı aktarım ifadesi hukuk danışmanıyla netleştirilecek</span></p>
+<h3>Ne kadar süre saklanır?</h3>
+<p>Talebiniz sonuçlanana kadar; kayıt gerçekleşmezse en geç <span class="ph">6 ay</span> içinde silinir.</p>
+<h3>Haklarınız</h3>
+<p>KVKK md. 11 kapsamında verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, aktarıldığı kişileri öğrenme, itiraz etme ve zararın giderilmesini talep etme haklarına sahipsiniz. Başvurularınızı <span class="ph">kreşin e-posta adresi</span> adresine ya da yukarıdaki adrese yazılı olarak iletebilirsiniz.</p>
+</div>
+</dialog>
+<footer><div class="wrap"><span>© 2026 Minik Damlalar Kreş ve Gündüz Bakımevi · Çankaya</span><button type="button" class="kvl ft" data-kvkk>KVKK aydınlatma metni</button></div></footer>
 
 <script>
 (function(){
@@ -534,6 +566,10 @@ $('lbx').onclick=function(){lb.close?lb.close():lb.removeAttribute('open')};
 lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
 lb.addEventListener('close',function(){$('lbf').innerHTML=''});
 lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')$('lbp').click();if(e.key==='ArrowRight')$('lbn').click()});
+
+// KVKK aydınlatma metni
+var kv=$('kvkk');document.querySelectorAll('[data-kvkk]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();if(kv.showModal)kv.showModal();else kv.setAttribute('open','')})});
+$('kvx').onclick=function(){kv.close()};kv.addEventListener('click',function(e){if(e.target===kv)kv.close()});
 
 // docs
 var DOCS=['Çocuğun nüfus cüzdanı fotokopisi','Veli kimlik fotokopileri','Aşı kartı fotokopisi','Sağlık raporu (toplu yaşama uygundur)','4 adet vesikalık fotoğraf','Çocuğu teslim alacak kişilerin listesi'];
