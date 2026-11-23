@@ -116,12 +116,29 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 .tg>*{min-width:0}
 .tg h2{font-size:clamp(2.1rem,4.8vw,3.2rem)}
 .tg .s{color:var(--muted);margin-top:14px;font-size:1.05rem}
-.jar{background:var(--paper);border-radius:30px;padding:24px;display:grid;gap:14px}
-.jar svg{width:100%;max-width:300px;height:auto;margin-inline:auto;display:block}
+.jar{background:var(--paper);border-radius:30px;padding:22px;display:grid;gap:14px;box-shadow:0 18px 40px -24px rgba(43,45,66,.35)}
+.jsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;counter-reset:js}
+.jsteps li{counter-increment:js;display:grid;justify-items:center;gap:4px;font-size:12.5px;font-weight:800;color:var(--muted);text-align:center;line-height:1.2}
+.jsteps li:before{content:counter(js);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid var(--line);color:var(--muted);transition:background .3s,border-color .3s,color .3s}
+.jsteps li.on{color:var(--ink)}.jsteps li.on:before{background:var(--green);border-color:var(--green);color:#fff}
+.jsteps li.now:before{background:var(--paper);border-color:var(--green);color:var(--green);box-shadow:0 0 0 4px var(--green-soft)}
+.jar svg{width:100%;max-width:280px;height:auto;margin-inline:auto;display:block;overflow:visible}
+.pc{transition:transform .75s cubic-bezier(.3,1.45,.55,1),fill 1.2s}
+#jlid{transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.bub{animation:bub 2.4s ease-in infinite;opacity:0}
+@keyframes bub{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-120px);opacity:0}}
+.jctl{display:grid;gap:10px;justify-items:center;text-align:center}
 .jbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.jbtns button{font:inherit;font-weight:800;font-size:14px;border:2px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;cursor:pointer;color:var(--ink)}
-.jbtns button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
-.jmsg{text-align:center;font-weight:800;color:var(--green);min-height:1.6em}
+.jbtns button{font:inherit;font-weight:800;font-size:14px;min-height:44px;border:2px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;cursor:pointer;color:var(--ink);display:inline-flex;gap:8px;align-items:center;transition:transform .15s,border-color .15s}
+.jbtns button:hover:not(:disabled){transform:translateY(-2px);border-color:var(--green)}
+.jbtns button i{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none}
+.jbtns button[aria-pressed="true"]{background:var(--green-soft);border-color:var(--green);color:#2f6b3a}
+.jbtns button:disabled{opacity:.55;cursor:default}
+.jday{width:100%;max-width:360px;display:grid;gap:6px}
+.jday input{background:linear-gradient(90deg,#cfe9f5,#e6dd8f)}
+.jday .dl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;color:var(--muted)}
+.jmsg{font-weight:800;color:#2f6b3a;min-height:3.2em;max-width:40ch}
+.jmsg small{display:block;font-weight:600;color:var(--muted);font-size:14px}
 
 /* why */
 .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
@@ -279,10 +296,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 <section class="taste" id="lezzet"><div class="wrap tg">
 <div><h2>Mutfakta da öğreniyoruz</h2><p class="s">Turşu kuruyoruz, meyve tabakları hazırlıyoruz, sofrayı birlikte kuruyoruz. Çocuk hazırlamasına yardım ettiği yemeği daha seve seve yer. Mutfağımızda yemekler her gün doğal malzemelerle hazırlanır.</p></div>
-<div class="jar"><p style="text-align:center;font-weight:800">Minik Damlalar turşusunu birlikte kuralım! Malzemeleri kavanoza ekleyin:</p>
-<svg viewBox="0 0 200 220" aria-hidden="true"><rect x="58" y="10" width="84" height="22" rx="6" fill="#c9a77c"/><path d="M50 40h100v150a20 20 0 0 1-20 20H70a20 20 0 0 1-20-20z" fill="#e8f5fb" stroke="#bcdde9" stroke-width="4"/><g id="jfill"></g><rect x="56" y="120" width="88" height="40" rx="6" fill="#fff" stroke="#e8524a" stroke-width="2"/><text x="100" y="138" text-anchor="middle" font-size="10" font-weight="800" fill="#e8524a" font-family="Figtree,sans-serif">MİNİK DAMLALAR</text><text x="100" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#2b2d42" font-family="Figtree,sans-serif">TURŞUSU</text></svg>
-<div class="jbtns" id="jbtns" role="group" aria-label="Turşu malzemeleri"></div>
-<p class="jmsg" id="jmsg" aria-live="polite"></p></div>
+<div class="jar">
+<ol class="jsteps" id="jsteps"><li>Malzemeler</li><li>Salamura</li><li>Kapak</li><li>Bekleme</li></ol>
+<svg viewBox="0 0 200 272" role="img" aria-label="Turşu kavanozu">
+<defs><clipPath id="jin"><path d="M54 62h92v152a18 18 0 0 1-18 18H72a18 18 0 0 1-18-18z"/></clipPath></defs>
+<path d="M50 58h100v156a22 22 0 0 1-22 22H72a22 22 0 0 1-22-22z" fill="#f3fafd"/>
+<g clip-path="url(#jin)"><rect id="jbrine" x="50" y="236" width="100" height="0" fill="rgba(190,226,242,.65)"/><g id="jfill"></g><g id="jbub"></g></g>
+<path d="M50 58h100v156a22 22 0 0 1-22 22H72a22 22 0 0 1-22-22z" fill="none" stroke="#bcdde9" stroke-width="4"/>
+<path d="M62 74v120" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+<g><rect x="34" y="242" width="132" height="28" rx="14" fill="#fff" stroke="#e8524a" stroke-width="2"/><text id="jlbl" x="100" y="260" text-anchor="middle" font-size="10.5" font-weight="800" fill="#2b2d42" font-family="Figtree,sans-serif">MİNİK DAMLALAR</text></g>
+<g id="jlid" style="transform:translateY(-30px);opacity:0"><rect x="56" y="40" width="88" height="22" rx="6" fill="#c9a77c"/><rect x="56" y="52" width="88" height="4" fill="#b48f62"/></g>
+</svg>
+<div class="jctl">
+<p class="jmsg" id="jmsg" aria-live="polite"></p>
+<div class="jbtns" id="jbtns" role="group" aria-label="Turşu adımları"></div>
+<div class="jday" id="jdayw" hidden><input type="range" id="jday" min="1" max="14" value="1" aria-label="Kaçıncı gün"><div class="dl"><span>1. gün</span><span>7. gün</span><span>14. gün</span></div></div>
+</div>
+</div>
 </div></section>
 
 <section><div class="wrap">
@@ -380,12 +410,43 @@ function grow(){var m=+rg.value,g=GR[m];$('age').textContent=ageTxt(m);var p=$('
  $('dsvg').style.transform='scale('+(.55+(m-12)/60*.45)+')';rg.setAttribute('aria-valuetext',ageTxt(m))}
 rg.oninput=grow;grow();
 
-// pickle jar
-var J=[['Salatalık','#58b368'],['Havuç','#f29a3e'],['Lahana','#c8e6a0'],['Biber','#e8524a'],['Sarımsak','#f4efe0']],added={};
-var jb=$('jbtns'),jf=$('jfill');
-J.forEach(function(j,i){var b=document.createElement('button');b.type='button';b.textContent=j[0];b.setAttribute('aria-pressed','false');b.onclick=function(){if(added[i])return;added[i]=1;b.setAttribute('aria-pressed','true');
- for(var k=0;k<5;k++){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');var n=Object.keys(added).length;c.setAttribute('cx',62+Math.random()*76);c.setAttribute('cy',196-n*26+Math.random()*20);c.setAttribute('r',7+Math.random()*5);c.setAttribute('fill',j[1]);c.setAttribute('stroke','rgba(0,0,0,.08)');jf.appendChild(c)}
- var n2=Object.keys(added).length;$('jmsg').textContent=n2===J.length?'Afiyet olsun! Turşumuz iki hafta sonra hazır.':n2+' / '+J.length+' malzeme eklendi'};jb.appendChild(b)});
+// pickle jar: 4 adımlı deney
+var J=[['Salatalık','#58b368','c'],['Havuç','#f29a3e','r'],['Lahana','#c8e6a0','e'],['Biber','#e8524a','p'],['Sarımsak','#f4efe0','g']];
+var NS='http://www.w3.org/2000/svg',jf=$('jfill'),jb=$('jbtns'),msg=$('jmsg'),stage=0,added=[],pieces=[],RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function say(t,sm){msg.textContent=t;if(sm){var e=document.createElement('small');e.textContent=sm;msg.appendChild(e)}}
+function steps(){document.querySelectorAll('#jsteps li').forEach(function(li,i){li.classList.toggle('on',i<stage);li.classList.toggle('now',i===stage)})}
+function el(n,at){var e=document.createElementNS(NS,n);for(var k in at)e.setAttribute(k,at[k]);return e}
+function piece(kind,col,x,y,r){var g=el('g',{'class':'pc'});var sh;
+ if(kind==='c'){sh=el('circle',{r:9,fill:col});g.appendChild(sh);g.appendChild(el('circle',{r:5,fill:'#d9efc4'}))}
+ else if(kind==='r'){sh=el('rect',{x:-4,y:-12,width:8,height:24,rx:4,fill:col})}
+ else if(kind==='e'){sh=el('ellipse',{rx:13,ry:7,fill:col})}
+ else if(kind==='p'){sh=el('path',{d:'M-4-12q8 2 6 14t-6 10q-2-12 0-24z',fill:col})}
+ else {sh=el('path',{d:'M0-8q7 6 5 11a5 5 0 0 1-10 0q-2-5 5-11z',fill:col,stroke:'#d8cfb6','stroke-width':1})}
+ if(kind!=='c')g.appendChild(sh);
+ g.dataset.k=kind;g.style.transform='translate('+x+'px,-40px) rotate('+r+'deg)';jf.appendChild(g);
+ requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transform='translate('+x+'px,'+y+'px) rotate('+(r+40)+'deg)'})});pieces.push({g:g,sh:sh,k:kind})}
+function addIng(i,btn){if(added.indexOf(i)>-1||stage!==0)return;added.push(i);btn.setAttribute('aria-pressed','true');btn.disabled=true;
+ var layer=added.length-1,base=222-layer*30;for(var k=0;k<6;k++){(function(k){setTimeout(function(){piece(J[i][2],J[i][1],64+k*14+Math.random()*6,base-Math.random()*16,Math.random()*90)},RM?0:k*90)})(k)}
+ if(added.length===J.length){stage=1;steps();setTimeout(render,RM?0:700)}else say(added.length+' / '+J.length+' malzeme kavanozda','Saymayı da unutmayalım: her malzemeden 6 parça!')}
+function anim(dur,fn,done){if(RM){fn(1);done&&done();return}var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/dur);fn(p);if(p<1)requestAnimationFrame(f);else done&&done()})(t0)}
+function pour(){var br=$('jbrine');jb.innerHTML='';say('Salamura dökülüyor…','Su, tuz ve biraz sirke.');anim(1400,function(p){var h=168*(1-Math.pow(1-p,3));br.setAttribute('y',236-h);br.setAttribute('height',h)},function(){stage=2;steps();render()})}
+function lid(){jb.innerHTML='';$('jlid').style.opacity=1;$('jlid').style.transform='translateY(0)';setTimeout(function(){stage=3;steps();render()},RM?0:650)}
+function mix(a,b,t){return a.map(function(v,i){return Math.round(v+(b[i]-v)*t)})}
+var DAYS=[[1,'1. gün: Kavanoz kapandı.','Tuz ve su işe başladı, şimdi sabırla bekliyoruz.'],[3,'3. gün: Kabarcıklar çıkıyor!','İyi bakteriler çalışıyor; buna fermantasyon diyoruz.'],[7,'7. gün: Renkler değişiyor.','Salatalıklar koyulaştı, su bulanıklaştı. Her gün gözlem defterimize çiziyoruz.'],[11,'11. gün: Kokusu geldi!','Az kaldı, kapağı açmadan bekliyoruz.'],[14,'14. gün: Turşumuz hazır, afiyet olsun!','Kendi kurduğu turşuyu çocuklar seve seve yer.']];
+function day(){var d=+$('jday').value,t=(d-1)/13,info=DAYS.filter(function(x){return d>=x[0]}).pop();say(info[1],info[2]);$('jlbl').textContent=d>=14?'TURŞUMUZ HAZIR!':'TURŞU · '+d+'. GÜN';
+ var w=mix([190,226,242],[222,214,140],t);$('jbrine').setAttribute('fill','rgba('+w.join(',')+',.7)');
+ pieces.forEach(function(p){if(p.k==='c'&&p.sh)p.sh.setAttribute('fill','rgb('+mix([88,179,104],[134,150,58],t).join(',')+')')});
+ var bb=$('jbub');var on=d>=3&&d<=11;if(on&&!bb.childNodes.length){for(var i=0;i<9;i++){var c=el('circle',{cx:62+Math.random()*76,cy:228,r:2+Math.random()*2.5,fill:'#fff','class':'bub'});c.style.animationDelay=(Math.random()*2.4)+'s';bb.appendChild(c)}}if(!on)bb.innerHTML='';
+ if(d>=14&&!$('jre')){var r=document.createElement('button');r.type='button';r.id='jre';r.textContent='Yeni turşu kur';r.onclick=reset;jb.appendChild(r)}}
+function btn(t,fn,c){var b=document.createElement('button');b.type='button';if(c){var i=document.createElement('i');i.style.setProperty('--c',c);b.appendChild(i)}b.appendChild(document.createTextNode(t));b.onclick=function(){fn(b)};jb.appendChild(b);return b}
+function render(){jb.innerHTML='';$('jdayw').hidden=stage<3;
+ if(stage===0){say('Turşumuzu birlikte kuralım!','Malzemeleri tek tek kavanoza ekleyin.');J.forEach(function(j,i){btn(j[0],function(b){addIng(i,b)},j[1])})}
+ else if(stage===1){say('Malzemeler tamam. Şimdi salamura!','Su, tuz ve sirke kavanozu dolduracak.');btn('Salamurayı dök',pour)}
+ else if(stage===2){say('Kapağı sıkıca kapatalım.','Hava girmezse turşu güzel olur.');btn('Kapağı kapat',lid)}
+ else{$('jday').value=1;day();$('jday').focus()}}
+$('jday').addEventListener('input',day);
+function reset(){stage=0;added=[];pieces=[];jf.innerHTML='';$('jbub').innerHTML='';var br=$('jbrine');br.setAttribute('y',236);br.setAttribute('height',0);br.setAttribute('fill','rgba(190,226,242,.65)');$('jlid').style.opacity=0;$('jlid').style.transform='translateY(-30px)';$('jlbl').textContent='MİNİK DAMLALAR';steps();render()}
+steps();render();
 
 // docs
 var DOCS=['Çocuğun nüfus cüzdanı fotokopisi','Veli kimlik fotokopileri','Aşı kartı fotokopisi','Sağlık raporu (toplu yaşama uygundur)','4 adet vesikalık fotoğraf','Çocuğu teslim alacak kişilerin listesi'];
