@@ -107,7 +107,7 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 .pgd p{color:var(--muted);font-size:15.5px}
 .pgd ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .pgd li{font-size:14px;font-weight:800;background:var(--bg);border-radius:999px;padding:5px 12px}
-.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,130px));gap:8px}
 .th{font:inherit;border:0;padding:0;cursor:zoom-in;border-radius:14px;overflow:hidden;aspect-ratio:1;background:var(--b);position:relative;transition:transform .18s}
 .th:hover{transform:scale(1.03)}
 .th img{width:100%;height:100%;object-fit:cover;display:block}
@@ -132,7 +132,12 @@ dialog.lb::backdrop{background:rgba(20,22,36,.82)}
 
 /* workshops */
 .ws{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.w{background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:20px;display:grid;gap:8px;align-content:start}
+.w{font:inherit;color:inherit;text-align:left;cursor:pointer;background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:20px;display:grid;gap:8px;align-content:start;transition:transform .18s cubic-bezier(.2,.8,.2,1),border-color .18s,box-shadow .18s}
+.w:hover{transform:translateY(-3px);box-shadow:0 12px 24px -16px rgba(43,45,66,.45)}
+.w[aria-expanded="true"]{border-color:var(--c2);box-shadow:0 12px 24px -16px rgba(43,45,66,.45)}
+.w .more{font-size:13.5px;font-weight:800;display:inline-flex;gap:6px;align-items:center}
+.w .more:after{content:"";width:7px;height:7px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.w[aria-expanded="true"] .more:after{transform:rotate(-135deg) translateY(-2px)}
 .w .ic{width:52px;height:52px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:var(--b);display:grid;place-items:center;color:var(--c)}
 .w .ic svg{transform:rotate(45deg)}
 .w h3{font-size:1.3rem}
@@ -316,11 +321,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 <section style="padding-top:0"><div class="wrap">
 <div class="head"><h2>Her gün başka bir renk</h2></div>
-<div class="ws">
-<div class="w" style="--b:var(--drop-soft)"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-move"/></svg></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p></div>
-<div class="w" style="--b:var(--orange-soft)"><span class="ic" style="--c:#b2601c"><svg class="ico" aria-hidden="true"><use href="#i-clay"/></svg></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p></div>
-<div class="w" style="--b:var(--violet-soft)"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p></div>
-<div class="w" style="--b:var(--coral-soft)"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p></div>
+<div class="ws" id="ws">
+<button type="button" class="w" style="--b:var(--drop-soft);--c2:var(--drop-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-move"/></svg></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p><span class="more">Fotoğraflar ve detay</span></button>
+<button type="button" class="w" style="--b:var(--orange-soft);--c2:#b2601c" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#b2601c"><svg class="ico" aria-hidden="true"><use href="#i-clay"/></svg></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p><span class="more">Fotoğraflar ve detay</span></button>
+<button type="button" class="w" style="--b:var(--violet-soft);--c2:#1f7a6f" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p><span class="more">Fotoğraflar ve detay</span></button>
+<button type="button" class="w" style="--b:var(--coral-soft);--c2:var(--coral-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p><span class="more">Fotoğraflar ve detay</span></button>
+<div class="pgd" id="wsd" hidden></div>
 </div></div></section>
 
 <section class="taste" id="lezzet"><div class="wrap tg">
@@ -482,29 +488,41 @@ $('jday').addEventListener('input',day);
 function reset(){stage=0;added=[];pieces=[];jf.innerHTML='';$('jbub').innerHTML='';var br=$('jbrine');br.setAttribute('y',236);br.setAttribute('height',0);br.setAttribute('fill','rgba(190,226,242,.65)');$('jlid').style.opacity=0;$('jlid').style.transform='translateY(-30px)';$('jlbl').textContent='MİNİK DAMLALAR';steps();render()}
 steps();render();
 
-// play groups: detail + gallery
-// Fotoğraflar gelince her gruba {src:'foto.jpg',alt:'açıklama'} ekleyin; boşken önizleme kutuları görünür.
-var PG=[
+// kartlar: detay + fotoğraf galerisi (oyun grupları ve etkinlikler)
+// Fotoğraflar gelince ilgili kaydın ph listesine {src:'foto.jpg',alt:'açıklama'} ekleyin; boşken önizleme kutuları görünür.
+var DATA={
+ pl:[
  {t:'Duyusal oyun keşifleri',d:'Kum, su, pirinç ve doğal malzemelerle dolu keşif kutularında minikler dokunarak, dinleyerek ve koklayarak öğrenir. Farklı dokular dil gelişimini ve merakı besler.',k:['Duyu kutuları','Su ve kum oyunu','Doku ve ses keşfi'],ph:[]},
  {t:'Grup oyunları',d:'Halka ve çember oyunları, şarkılı oyunlar ve sıra beklemeli etkinliklerle yaşıtlarıyla iletişim kurmayı, paylaşmayı ve birlikte oynamayı öğrenir.',k:['Çember oyunları','Şarkılı halka oyunları','Paylaşma ve sıra'],ph:[]},
  {t:'Taklit ve ince motor',d:'Aktarma, takma-çıkarma ve mandal oyunlarıyla küçük kaslar güçlenir; ev işlerini taklit eden oyunlarla günlük yaşam becerileri gelişir.',k:['Aktarma oyunları','Takma ve dizme','Mutfak ve ev taklidi'],ph:[]},
  {t:'Montessori yaklaşımları',d:'Pratik yaşam etkinlikleri, eşleştirme ve sıralama materyalleriyle çocuk kendi hızında, kendi seçimiyle çalışır; öz güveni ve bağımsızlığı artar.',k:['Pratik yaşam','Eşleştirme ve sıralama','Kendi başına yapma'],ph:[]},
- {t:'Sanat, müzik ve hareket',d:'Parmak boya, ritim aletleri, dans ve denge oyunlarıyla yaratıcılık ve beden farkındalığı gelişir.',k:['Parmak boya','Ritim ve şarkı','Dans ve denge'],ph:[]}];
-var cards=[].slice.call(document.querySelectorAll('#pl .pi')),pgd=$('pgd'),cur=-1,gal=[],gi=0;
+ {t:'Sanat, müzik ve hareket',d:'Parmak boya, ritim aletleri, dans ve denge oyunlarıyla yaratıcılık ve beden farkındalığı gelişir.',k:['Parmak boya','Ritim ve şarkı','Dans ve denge'],ph:[]}],
+ ws:[
+ {t:'Hareket eğitimi',d:'Koşma, zıplama, denge ve koordinasyon oyunlarıyla büyük kaslar güçlenir. Engel parkurları ve müzikli hareket saatleri çocukların enerjisini doğru yöne akıtır.',k:['Denge ve koordinasyon','Engel parkuru','Müzikli hareket'],ph:[]},
+ {t:'Heykel ve sanat',d:'Kil, oyun hamuru, doğal ve atık malzemelerle çocuklar elleriyle düşünür. Süreç sonuçtan önemlidir; her çocuk kendi eserini kendi yoluyla yapar.',k:['Kil ve hamur','Doğal malzemeler','Boya ve kolaj'],ph:[]},
+ {t:'İlkokula hazırlık',d:'Dikkat oyunları, kalem tutma ve çizgi çalışmaları, ses ve sayı farkındalığıyla çocuk ilkokula hazır ve özgüvenli başlar.',k:['Dikkat ve hafıza','Kalem ve çizgi','Ses ve sayı'],ph:[]},
+ {t:'Özel günler',d:'Bayramlar, belirli gün ve haftalar, doğum günleri ve aile etkinlikleriyle değerleri yaşayarak öğreniyoruz. Velilerimiz de bu günlerin bir parçası.',k:['Bayram kutlamaları','Belirli gün ve haftalar','Aile etkinlikleri'],ph:[]}]};
+var gal=[],gi=0,lbCard=null;
 function tile(card,label){var d=document.createElement('span');d.className='ph-tile';d.innerHTML=card.querySelector('.ic').innerHTML;var t=document.createElement('span');t.textContent=label;d.appendChild(t);return d}
-function openPG(i){var card=cards[i];if(cur===i){close();return}cur=i;cards.forEach(function(c,j){c.setAttribute('aria-expanded',j===i)});
- var g=PG[i];pgd.innerHTML='';pgd.style.setProperty('--b',card.style.getPropertyValue('--b'));pgd.style.setProperty('--c',card.style.getPropertyValue('--c2'));
- var h=document.createElement('h3');h.textContent=g.t;var p=document.createElement('p');p.textContent=g.d;var ul=document.createElement('ul');g.k.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});
- var th=document.createElement('div');th.className='thumbs';gal=g.ph.length?g.ph:g.k.concat(['Atölyeden bir an']).map(function(x){return {label:x}});
- gal.forEach(function(ph,j){var b=document.createElement('button');b.type='button';b.className='th';b.setAttribute('aria-label',(ph.alt||ph.label)+' fotoğrafını büyüt');
-  if(ph.src){var im=document.createElement('img');im.src=ph.src;im.alt=ph.alt||'';im.loading='lazy';b.appendChild(im)}else b.appendChild(tile(card,ph.label));
-  b.onclick=function(){lbOpen(j)};th.appendChild(b)});
- pgd.append(h,p,ul,th);if(!g.ph.length){var n=document.createElement('p');n.className='pgnote';n.innerHTML='<span class="ph">Atölye fotoğraflarınız buraya eklenecek</span>';pgd.appendChild(n)}
- var row=card;if(innerWidth>=561&&!card.classList.contains('wide')&&i%2===0&&cards[i+1])row=cards[i+1];row.after(pgd);pgd.hidden=false;if(innerWidth<900)setTimeout(function(){pgd.scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
-function close(){cur=-1;pgd.hidden=true;cards.forEach(function(c){c.setAttribute('aria-expanded','false')})}
-cards.forEach(function(c,i){c.addEventListener('click',function(){openPG(i)})});
+function gallery(gridId,panelId){
+ var cards=[].slice.call(document.querySelectorAll('#'+gridId+' > button')),pan=$(panelId),cur=-1,data=DATA[gridId];
+ function close(){cur=-1;pan.hidden=true;cards.forEach(function(c){c.setAttribute('aria-expanded','false')})}
+ function open(i){var card=cards[i];if(cur===i){close();return}pan.hidden=true;cur=i;cards.forEach(function(c,j){c.setAttribute('aria-expanded',j===i)});
+  var g=data[i],ph=g.ph.length?g.ph:g.k.concat(['Atölyeden bir an']).map(function(x){return {label:x}});
+  pan.innerHTML='';pan.style.setProperty('--b',card.style.getPropertyValue('--b'));pan.style.setProperty('--c',card.style.getPropertyValue('--c2'));
+  var h=document.createElement('h3');h.textContent=g.t;var p=document.createElement('p');p.textContent=g.d;var ul=document.createElement('ul');g.k.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});
+  var th=document.createElement('div');th.className='thumbs';
+  ph.forEach(function(x,j){var b=document.createElement('button');b.type='button';b.className='th';b.setAttribute('aria-label',(x.alt||x.label)+' fotoğrafını büyüt');
+   if(x.src){var im=document.createElement('img');im.src=x.src;im.alt=x.alt||'';im.loading='lazy';b.appendChild(im)}else b.appendChild(tile(card,x.label));
+   b.onclick=function(){gal=ph;lbCard=card;lbOpen(j)};th.appendChild(b)});
+  pan.append(h,p,ul,th);if(!g.ph.length){var n=document.createElement('p');n.className='pgnote';n.innerHTML='<span class="ph">Fotoğraflarınız buraya eklenecek</span>';pan.appendChild(n)}
+  // paneli tıklanan kartın satırının sonuna yerleştir
+  var row=card,top=card.offsetTop;for(var j=i+1;j<cards.length&&cards[j].offsetTop===top;j++)row=cards[j];
+  row.after(pan);pan.hidden=false;if(innerWidth<900)setTimeout(function(){pan.scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
+ cards.forEach(function(c,i){c.addEventListener('click',function(){open(i)})})}
+gallery('pl','pgd');gallery('ws','wsd');
 var lb=$('lb');
-function lbShow(){var f=$('lbf'),ph=gal[gi];f.innerHTML='';if(ph.src){var im=document.createElement('img');im.src=ph.src;im.alt=ph.alt||'';f.appendChild(im)}else f.appendChild(tile(cards[cur],ph.label+' · fotoğraf eklenecek'));$('lbc').textContent=(gi+1)+' / '+gal.length}
+function lbShow(){var f=$('lbf'),ph=gal[gi];f.innerHTML='';if(ph.src){var im=document.createElement('img');im.src=ph.src;im.alt=ph.alt||'';f.appendChild(im)}else f.appendChild(tile(lbCard,ph.label+' · fotoğraf eklenecek'));$('lbc').textContent=(gi+1)+' / '+gal.length}
 function lbOpen(j){gi=j;lbShow();if(lb.showModal)lb.showModal();else lb.setAttribute('open','')}
 $('lbp').onclick=function(){gi=(gi-1+gal.length)%gal.length;lbShow()};$('lbn').onclick=function(){gi=(gi+1)%gal.length;lbShow()};
 $('lbx').onclick=function(){lb.close?lb.close():lb.removeAttribute('open')};
