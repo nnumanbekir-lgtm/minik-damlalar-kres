@@ -110,7 +110,10 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 .thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,130px));gap:8px}
 .th{font:inherit;border:0;padding:0;cursor:zoom-in;border-radius:14px;overflow:hidden;aspect-ratio:1;background:var(--b);position:relative;transition:transform .18s}
 .th:hover{transform:scale(1.03)}
-.th img{width:100%;height:100%;object-fit:cover;display:block}
+.th img,.th video{width:100%;height:100%;object-fit:cover;display:block}
+.th .play{position:absolute;right:6px;bottom:6px;width:26px;height:26px;border-radius:50%;background:rgba(43,45,66,.78)}
+.th .play:after{content:"";position:absolute;left:10px;top:7px;border-left:9px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.lbf video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
 .ph-tile{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:4px;color:var(--c);font-size:11.5px;font-weight:800;text-align:center;padding:6px;background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(255,255,255,.45) 10px 20px)}
 .ph-tile svg{width:28px;height:28px}
 .pgnote{font-size:13px;color:var(--muted)}
@@ -311,21 +314,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <section id="oyun"><div class="wrap pg">
 <div><h2 class="pbadge">12–36<small>ay oyun grupları</small></h2><p class="s">Henüz tam gün okula başlamadan, ebeveyniyle ayrılmadan önce sosyalleşmek isteyen minikler için. Küçük gruplar, kısa oturumlar, bol oyun.</p><div class="cta"><a class="btn d" href="#iletisim" data-g="5">Oyun grubu için bilgi al</a></div></div>
 <div class="pl" id="pl">
-<button type="button" class="pi" style="--b:var(--yellow-soft);--c2:#9a6a00" data-k="0" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#9a6a00"><svg class="ico" aria-hidden="true"><use href="#i-sense"/></svg></span><h3>Duyusal oyun keşifleri</h3><p>Tüm duyu alanlarını destekleyen keşif ve deneyim etkinlikleri.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="pi" style="--b:var(--coral-soft);--c2:var(--coral-d)" data-k="1" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-blocks"/></svg></span><h3>Grup oyunları</h3><p>Sosyal becerileri güçlendiren, yaşıtlarla etkileşim fırsatları.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="pi" style="--b:var(--green-soft);--c2:#2f8a3f" data-k="2" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#2f8a3f"><svg class="ico" aria-hidden="true"><use href="#i-puzzle"/></svg></span><h3>Taklit ve ince motor</h3><p>Günlük yaşam becerilerini ve el-göz koordinasyonunu geliştiren etkinlikler.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="pi" style="--b:var(--drop-soft);--c2:var(--drop-d)" data-k="3" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-tower"/></svg></span><h3>Montessori yaklaşımları</h3><p>Bağımsızlığı, öz güveni ve keşfetme isteğini destekleyen etkinlikler.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="pi wide" style="--b:var(--violet-soft);--c2:#1f7a6f" data-k="4" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-art"/></svg></span><h3>Sanat, müzik ve hareket</h3><p>Yaratıcılığı, ifade becerilerini ve bedensel gelişimi destekleyen eğlenceli atölyeler.</p><span class="more">Fotoğraflar ve detay</span></button>
+<button type="button" class="pi" style="--b:var(--yellow-soft);--c2:#9a6a00" data-k="0" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#9a6a00"><svg class="ico" aria-hidden="true"><use href="#i-sense"/></svg></span><h3>Duyusal oyun keşifleri</h3><p>Tüm duyu alanlarını destekleyen keşif ve deneyim etkinlikleri.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="pi" style="--b:var(--coral-soft);--c2:var(--coral-d)" data-k="1" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-blocks"/></svg></span><h3>Grup oyunları</h3><p>Sosyal becerileri güçlendiren, yaşıtlarla etkileşim fırsatları.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="pi" style="--b:var(--green-soft);--c2:#2f8a3f" data-k="2" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#2f8a3f"><svg class="ico" aria-hidden="true"><use href="#i-puzzle"/></svg></span><h3>Taklit ve ince motor</h3><p>Günlük yaşam becerilerini ve el-göz koordinasyonunu geliştiren etkinlikler.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="pi" style="--b:var(--drop-soft);--c2:var(--drop-d)" data-k="3" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-tower"/></svg></span><h3>Montessori yaklaşımları</h3><p>Bağımsızlığı, öz güveni ve keşfetme isteğini destekleyen etkinlikler.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="pi wide" style="--b:var(--violet-soft);--c2:#1f7a6f" data-k="4" aria-expanded="false" aria-controls="pgd"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-art"/></svg></span><h3>Sanat, müzik ve hareket</h3><p>Yaratıcılığı, ifade becerilerini ve bedensel gelişimi destekleyen eğlenceli atölyeler.</p><span class="more">Fotoğraf, video ve detay</span></button>
 <div class="pgd" id="pgd" hidden></div>
 </div></div></section>
 
 <section style="padding-top:0"><div class="wrap">
 <div class="head"><h2>Her gün başka bir renk</h2></div>
 <div class="ws" id="ws">
-<button type="button" class="w" style="--b:var(--drop-soft);--c2:var(--drop-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-move"/></svg></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="w" style="--b:var(--orange-soft);--c2:#b2601c" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#b2601c"><svg class="ico" aria-hidden="true"><use href="#i-clay"/></svg></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="w" style="--b:var(--violet-soft);--c2:#1f7a6f" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p><span class="more">Fotoğraflar ve detay</span></button>
-<button type="button" class="w" style="--b:var(--coral-soft);--c2:var(--coral-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p><span class="more">Fotoğraflar ve detay</span></button>
+<button type="button" class="w" style="--b:var(--drop-soft);--c2:var(--drop-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-move"/></svg></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="w" style="--b:var(--orange-soft);--c2:#b2601c" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#b2601c"><svg class="ico" aria-hidden="true"><use href="#i-clay"/></svg></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="w" style="--b:var(--violet-soft);--c2:#1f7a6f" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p><span class="more">Fotoğraf, video ve detay</span></button>
+<button type="button" class="w" style="--b:var(--coral-soft);--c2:var(--coral-d)" aria-expanded="false" aria-controls="wsd"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p><span class="more">Fotoğraf, video ve detay</span></button>
 <div class="pgd" id="wsd" hidden></div>
 </div></div></section>
 
@@ -489,7 +492,8 @@ function reset(){stage=0;added=[];pieces=[];jf.innerHTML='';$('jbub').innerHTML=
 steps();render();
 
 // kartlar: detay + fotoğraf galerisi (oyun grupları ve etkinlikler)
-// Fotoğraflar gelince ilgili kaydın ph listesine {src:'foto.jpg',alt:'açıklama'} ekleyin; boşken önizleme kutuları görünür.
+// Fotoğraf: {src:'foto.jpg',alt:'açıklama'}  Video: {video:'video.mp4',poster:'kapak.jpg',alt:'açıklama'}
+// İlgili kaydın ph listesine ekleyin; boşken önizleme kutuları görünür.
 var DATA={
  pl:[
  {t:'Duyusal oyun keşifleri',d:'Kum, su, pirinç ve doğal malzemelerle dolu keşif kutularında minikler dokunarak, dinleyerek ve koklayarak öğrenir. Farklı dokular dil gelişimini ve merakı besler.',k:['Duyu kutuları','Su ve kum oyunu','Doku ve ses keşfi'],ph:[]},
@@ -508,25 +512,27 @@ function gallery(gridId,panelId){
  var cards=[].slice.call(document.querySelectorAll('#'+gridId+' > button')),pan=$(panelId),cur=-1,data=DATA[gridId];
  function close(){cur=-1;pan.hidden=true;cards.forEach(function(c){c.setAttribute('aria-expanded','false')})}
  function open(i){var card=cards[i];if(cur===i){close();return}pan.hidden=true;cur=i;cards.forEach(function(c,j){c.setAttribute('aria-expanded',j===i)});
-  var g=data[i],ph=g.ph.length?g.ph:g.k.concat(['Atölyeden bir an']).map(function(x){return {label:x}});
+  var g=data[i],ph=g.ph.length?g.ph:g.k.map(function(x){return {label:x}}).concat([{label:'Atölyeden bir video',vid:1}]);
   pan.innerHTML='';pan.style.setProperty('--b',card.style.getPropertyValue('--b'));pan.style.setProperty('--c',card.style.getPropertyValue('--c2'));
   var h=document.createElement('h3');h.textContent=g.t;var p=document.createElement('p');p.textContent=g.d;var ul=document.createElement('ul');g.k.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});
   var th=document.createElement('div');th.className='thumbs';
   ph.forEach(function(x,j){var b=document.createElement('button');b.type='button';b.className='th';b.setAttribute('aria-label',(x.alt||x.label)+' fotoğrafını büyüt');
-   if(x.src){var im=document.createElement('img');im.src=x.src;im.alt=x.alt||'';im.loading='lazy';b.appendChild(im)}else b.appendChild(tile(card,x.label));
+   if(x.src||x.poster){var im=document.createElement('img');im.src=x.src||x.poster;im.alt=x.alt||'';im.loading='lazy';b.appendChild(im)}else if(x.video){var v=document.createElement('video');v.src=x.video+'#t=0.5';v.muted=true;v.preload='metadata';v.setAttribute('playsinline','');b.appendChild(v)}else b.appendChild(tile(card,x.label));
+   if(x.video||x.vid){var pl=document.createElement('span');pl.className='play';b.appendChild(pl)}
    b.onclick=function(){gal=ph;lbCard=card;lbOpen(j)};th.appendChild(b)});
-  pan.append(h,p,ul,th);if(!g.ph.length){var n=document.createElement('p');n.className='pgnote';n.innerHTML='<span class="ph">Fotoğraflarınız buraya eklenecek</span>';pan.appendChild(n)}
+  pan.append(h,p,ul,th);if(!g.ph.length){var n=document.createElement('p');n.className='pgnote';n.innerHTML='<span class="ph">Fotoğraf ve videolarınız buraya eklenecek</span>';pan.appendChild(n)}
   // paneli tıklanan kartın satırının sonuna yerleştir
   var row=card,top=card.offsetTop;for(var j=i+1;j<cards.length&&cards[j].offsetTop===top;j++)row=cards[j];
   row.after(pan);pan.hidden=false;if(innerWidth<900)setTimeout(function(){pan.scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
  cards.forEach(function(c,i){c.addEventListener('click',function(){open(i)})})}
 gallery('pl','pgd');gallery('ws','wsd');
 var lb=$('lb');
-function lbShow(){var f=$('lbf'),ph=gal[gi];f.innerHTML='';if(ph.src){var im=document.createElement('img');im.src=ph.src;im.alt=ph.alt||'';f.appendChild(im)}else f.appendChild(tile(lbCard,ph.label+' · fotoğraf eklenecek'));$('lbc').textContent=(gi+1)+' / '+gal.length}
+function lbShow(){var f=$('lbf'),ph=gal[gi];f.innerHTML='';if(ph.video){var v=document.createElement('video');v.src=ph.video;if(ph.poster)v.poster=ph.poster;v.controls=true;v.autoplay=true;v.setAttribute('playsinline','');f.appendChild(v)}else if(ph.src){var im=document.createElement('img');im.src=ph.src;im.alt=ph.alt||'';f.appendChild(im)}else f.appendChild(tile(lbCard,ph.label+(ph.vid?' · video eklenecek':' · fotoğraf eklenecek')));$('lbc').textContent=(gi+1)+' / '+gal.length}
 function lbOpen(j){gi=j;lbShow();if(lb.showModal)lb.showModal();else lb.setAttribute('open','')}
 $('lbp').onclick=function(){gi=(gi-1+gal.length)%gal.length;lbShow()};$('lbn').onclick=function(){gi=(gi+1)%gal.length;lbShow()};
 $('lbx').onclick=function(){lb.close?lb.close():lb.removeAttribute('open')};
 lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
+lb.addEventListener('close',function(){$('lbf').innerHTML=''});
 lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')$('lbp').click();if(e.key==='ArrowRight')$('lbn').click()});
 
 // docs
