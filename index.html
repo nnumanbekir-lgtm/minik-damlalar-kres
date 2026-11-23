@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Figtree:wght@400;600;700;800&display=swap">
 <style>
 /* Layout: a rainbow umbrella over falling drops. The centrepiece is a growth slider: one drop grows from 12 months to 6 years and shows what the child does and what the school offers at that age. Then the play groups, the taste workshop, and the parent info */
-:root{--bg:#fffaf6;--paper:#fff;--ink:#2b2d42;--muted:#666a80;--coral:#e8524a;--coral-d:#c63a33;--coral-soft:#fde5e2;--orange:#f29a3e;--orange-soft:#feeedd;--drop:#3fa7e0;--drop-d:#2582b6;--drop-soft:#e2f2fb;--green:#58b368;--green-soft:#e3f4e6;--yellow:#f7c948;--yellow-soft:#fff4d1;--violet:#8e6bd1;--violet-soft:#eee8fa;--line:#efe6dd;
+:root{--bg:#fffaf6;--paper:#fff;--ink:#2b2d42;--muted:#666a80;--coral:#e8524a;--coral-d:#c63a33;--coral-soft:#fde5e2;--orange:#f29a3e;--orange-soft:#feeedd;--drop:#3fa7e0;--drop-d:#2582b6;--drop-soft:#e2f2fb;--green:#58b368;--green-soft:#e3f4e6;--yellow:#f7c948;--yellow-soft:#fff4d1;--violet:#2a9d8f;--violet-soft:#dff3ef;--line:#efe6dd;
 --disp:'Sniglet',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -18,7 +18,12 @@ h1,h2,h3{font-family:var(--disp);font-weight:800;line-height:1.05;margin:0;text-
 p{margin:0}a{color:inherit}
 :focus-visible{outline:3px solid var(--drop);outline-offset:3px}
 .num{font-variant-numeric:tabular-nums}
-.ph{background:var(--yellow);color:var(--ink);border-radius:6px;padding:0 6px}
+.ph{background:#ffe15a;color:var(--ink);border-radius:6px;padding:0 6px}
+[hidden]{display:none!important}
+::selection{background:var(--drop-soft);color:var(--ink)}
+input,textarea{caret-color:var(--coral)}
+html{accent-color:var(--coral)}
+section[id]{scroll-margin-top:12px}
 
 .preview{background:var(--ink);color:#e8e9f1;font-size:13px}
 .preview .wrap{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;padding-block:8px}
@@ -31,10 +36,13 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px
 .logo small{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:.16em}
 .nl{display:flex;gap:22px;font-weight:800;font-size:15px;align-items:center}
 .nl a:not(.btn){text-decoration:none;color:var(--muted)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;background:var(--coral);color:#fff;text-decoration:none;font:inherit;font-weight:800;font-size:16px;padding:13px 22px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 4px 0 var(--coral-d)}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--coral-d)}
-.btn.d{background:var(--drop);box-shadow:0 4px 0 var(--drop-d)}
-.btn.lt{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;background:var(--coral);color:#fff;text-decoration:none;font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 22px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 6px 16px -6px rgba(198,58,51,.55);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,background .18s}
+.btn:hover{transform:translateY(-2px);background:var(--coral-d);box-shadow:0 10px 22px -8px rgba(198,58,51,.6)}
+.btn:active{transform:translateY(1px);box-shadow:0 3px 8px -4px rgba(198,58,51,.5)}
+.btn.d{background:var(--drop);box-shadow:0 6px 16px -6px rgba(37,130,182,.55)}.btn.d:hover{background:var(--drop-d)}
+.btn.lt{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}.btn.lt:hover{background:var(--paper);box-shadow:inset 0 0 0 2px var(--drop)}
+.nl a:not(.btn):hover{color:var(--ink)}
+.info a{text-underline-offset:3px}
 
 /* hero */
 .hero{padding-block:16px 64px;position:relative;overflow:hidden}
@@ -88,7 +96,8 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 .pg .s{color:var(--muted);margin-top:14px}
 .pl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pi{border-radius:22px;padding:18px;background:var(--b);display:grid;gap:6px;align-content:start}
-.pi .ic{font-size:28px}
+.pi .ic{width:44px;height:44px;border-radius:14px;background:var(--paper);display:grid;place-items:center;color:var(--c)}
+.ico{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .pi h3{font-size:1.2rem}
 .pi p{font-size:14.5px;color:var(--muted)}
 .pi.wide{grid-column:1/-1}
@@ -96,8 +105,8 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;bac
 /* workshops */
 .ws{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .w{background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:20px;display:grid;gap:8px;align-content:start}
-.w .ic{width:52px;height:52px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:var(--b);display:grid;place-items:center}
-.w .ic span{transform:rotate(45deg);font-size:24px}
+.w .ic{width:52px;height:52px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:var(--b);display:grid;place-items:center;color:var(--c)}
+.w .ic svg{transform:rotate(45deg)}
 .w h3{font-size:1.3rem}
 .w p{color:var(--muted);font-size:15px}
 
@@ -190,9 +199,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
 </style></head><body>
 
-<div class="preview"><div class="wrap"><span><b>Önizleme.</b> Bu sayfa Minik Damlalar Kreş ve Gündüz Bakımevi için hazırlanmış taslak bir tasarımdır.</span><span>Sarı işaretli bilgiler sizin onayınızla güncellenecektir.</span></div></div>
+<div class="preview"><div class="wrap"><span><b>Önizleme.</b> Bu sayfa Minik Damlalar Kreş ve Gündüz Bakımevi için hazırlanmış taslak bir tasarımdır.</span><span>Okulunuzun fotoğrafları ve sarı işaretli bilgiler sizin onayınızla eklenecektir.</span></div></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-sense" viewBox="0 0 24 24"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7-2.6 0-4-1.4-5.5-3.5L4 13a1.5 1.5 0 0 1 2.4-1.8L8 13"/></symbol>
+<symbol id="i-blocks" viewBox="0 0 24 24"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></symbol>
+<symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M4 8h4a2 2 0 1 1 4 0h4v4a2 2 0 1 1 0 4v4H4v-4a2 2 0 1 0 0-4z"/></symbol>
+<symbol id="i-tower" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4" rx="1"/><rect x="7" y="8" width="10" height="5" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/></symbol>
+<symbol id="i-art" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-1.4-1.2-1.7-1.2-2.9 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+<symbol id="i-move" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M8 21l3-6 3 2v4M6 11l4-3 4 1 3 3M11 15l-1-4"/></symbol>
+<symbol id="i-clay" viewBox="0 0 24 24"><path d="M6 20h12M8 20c-2-3-2-6 0-8 1-1 1-3 0-5h8c-1 2-1 4 0 5 2 2 2 5 0 8"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M3 4c5 3 13 3 18 0"/><path d="M6 5.8l1.5 5L9 6.6M11 6.6l1 5 1-5M15 6.6l1.5 4.2L18 5.8"/></symbol>
 <symbol id="dr" viewBox="0 0 30 40"><path d="M15 2C15 2 3 18 3 26a12 12 0 0 0 24 0C27 18 15 2 15 2z" fill="currentColor"/></symbol>
 </defs></svg>
 
@@ -204,7 +222,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 <header class="hero"><div class="wrap hg">
 <div>
-<div class="chips"><span style="--b:var(--drop-soft);--c:var(--drop-d)">💧 2–6 yaş kreş ve gündüz bakımevi</span><span style="--b:var(--coral-soft);--c:var(--coral-d)">🧸 12–36 ay oyun grupları</span></div>
+<div class="chips"><span style="--b:var(--drop-soft);--c:var(--drop-d)">2–6 yaş kreş ve gündüz bakımevi</span><span style="--b:var(--coral-soft);--c:var(--coral-d)">12–36 ay oyun grupları</span></div>
 <h1>Her minik <span>damlada</span> bir <em>gelişim hikâyesi.</em></h1>
 <p class="s">Dikmen'de, kalabalık olmayan sınıflarda, her çocuğu adıyla tanıyan öğretmenlerle. Doğal mutfak, bol oyun, ilkokula sağlam bir hazırlık.</p>
 <div class="cta"><a class="btn" href="#iletisim">Okulu gezmek istiyorum</a><a class="btn lt" href="#gelisim">Çocuğumun yaşında neler var?</a></div>
@@ -217,7 +235,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <path d="M-96-96a160 120 0 0 1 64-22L0 0z" fill="#f29a3e"/>
 <path d="M-32-118a160 120 0 0 1 64 0L0 0z" fill="#58b368"/>
 <path d="M32-118a160 120 0 0 1 64 22L0 0z" fill="#3fa7e0"/>
-<path d="M96-96a160 120 0 0 1 64 96L0 0z" fill="#8e6bd1"/>
+<path d="M96-96a160 120 0 0 1 64 96L0 0z" fill="#2a9d8f"/>
 <path d="M-160 0q20 14 40 0 20 14 40 0 20 14 40 0 20 14 40 0 20 14 40 0 20 14 40 0 20 14 40 0 20 14 40 0" fill="#fffaf6"/>
 <path d="M0-118v-14" stroke="#2b2d42" stroke-width="5" stroke-linecap="round"/>
 <path d="M0 0v150q0 20-20 20" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
@@ -229,7 +247,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </div></header>
 
 <section class="grow" id="gelisim"><div class="wrap">
-<div class="head"><p class="eb">Damla damla büyüyoruz</p><h2>Çocuğunuzun yaşında neler oluyor?</h2><p>Kaydırıcıyı çocuğunuzun yaşına getirin. O yaşta çocukların neler yaptığını ve bizim programımızda neler olduğunu görün.</p></div>
+<div class="head"><h2>Çocuğunuzun yaşında neler oluyor?</h2><p>Kaydırıcıyı çocuğunuzun yaşına getirin. O yaşta çocukların neler yaptığını ve bizim programımızda neler olduğunu görün.</p></div>
 <div class="gw">
 <div class="sl"><div class="top"><span class="age num" id="age">2 yaş</span><span class="prog" id="prog"></span></div>
 <input type="range" id="rg" min="12" max="72" step="6" value="24" aria-label="Çocuğun yaşı (ay)">
@@ -241,26 +259,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </div></div></section>
 
 <section id="oyun"><div class="wrap pg">
-<div><p class="eb">0–3 yaş oyun grubu atölyesi</p><span class="pbadge">12–36<small>ay oyun grupları</small></span><p class="s">Henüz tam gün okula başlamadan, ebeveyniyle ayrılmadan önce sosyalleşmek isteyen minikler için. Küçük gruplar, kısa oturumlar, bol oyun.</p><div class="cta"><a class="btn d" href="#iletisim" data-g="5">Oyun grubu için bilgi al</a></div></div>
+<div><h2 class="pbadge">12–36<small>ay oyun grupları</small></h2><p class="s">Henüz tam gün okula başlamadan, ebeveyniyle ayrılmadan önce sosyalleşmek isteyen minikler için. Küçük gruplar, kısa oturumlar, bol oyun.</p><div class="cta"><a class="btn d" href="#iletisim" data-g="5">Oyun grubu için bilgi al</a></div></div>
 <div class="pl">
-<div class="pi" style="--b:var(--yellow-soft)"><span class="ic">🌈</span><h3>Duyusal oyun keşifleri</h3><p>Tüm duyu alanlarını destekleyen keşif ve deneyim etkinlikleri.</p></div>
-<div class="pi" style="--b:var(--coral-soft)"><span class="ic">🧱</span><h3>Grup oyunları</h3><p>Sosyal becerileri güçlendiren, yaşıtlarla etkileşim fırsatları.</p></div>
-<div class="pi" style="--b:var(--green-soft)"><span class="ic">🧩</span><h3>Taklit ve ince motor</h3><p>Günlük yaşam becerilerini ve el-göz koordinasyonunu geliştiren etkinlikler.</p></div>
-<div class="pi" style="--b:var(--drop-soft)"><span class="ic">🪵</span><h3>Montessori yaklaşımları</h3><p>Bağımsızlığı, öz güveni ve keşfetme isteğini destekleyen etkinlikler.</p></div>
-<div class="pi wide" style="--b:var(--violet-soft)"><span class="ic">🎨</span><h3>Sanat, müzik ve hareket</h3><p>Yaratıcılığı, ifade becerilerini ve bedensel gelişimi destekleyen eğlenceli atölyeler.</p></div>
+<div class="pi" style="--b:var(--yellow-soft)"><span class="ic" style="--c:#9a6a00"><svg class="ico" aria-hidden="true"><use href="#i-sense"/></svg></span><h3>Duyusal oyun keşifleri</h3><p>Tüm duyu alanlarını destekleyen keşif ve deneyim etkinlikleri.</p></div>
+<div class="pi" style="--b:var(--coral-soft)"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-blocks"/></svg></span><h3>Grup oyunları</h3><p>Sosyal becerileri güçlendiren, yaşıtlarla etkileşim fırsatları.</p></div>
+<div class="pi" style="--b:var(--green-soft)"><span class="ic" style="--c:#2f8a3f"><svg class="ico" aria-hidden="true"><use href="#i-puzzle"/></svg></span><h3>Taklit ve ince motor</h3><p>Günlük yaşam becerilerini ve el-göz koordinasyonunu geliştiren etkinlikler.</p></div>
+<div class="pi" style="--b:var(--drop-soft)"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-tower"/></svg></span><h3>Montessori yaklaşımları</h3><p>Bağımsızlığı, öz güveni ve keşfetme isteğini destekleyen etkinlikler.</p></div>
+<div class="pi wide" style="--b:var(--violet-soft)"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-art"/></svg></span><h3>Sanat, müzik ve hareket</h3><p>Yaratıcılığı, ifade becerilerini ve bedensel gelişimi destekleyen eğlenceli atölyeler.</p></div>
 </div></div></section>
 
 <section style="padding-top:0"><div class="wrap">
-<div class="head"><p class="eb">Etkinliklerimiz</p><h2>Her gün başka bir renk</h2></div>
+<div class="head"><h2>Her gün başka bir renk</h2></div>
 <div class="ws">
-<div class="w" style="--b:var(--drop-soft)"><span class="ic"><span>🤸</span></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p></div>
-<div class="w" style="--b:var(--orange-soft)"><span class="ic"><span>🗿</span></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p></div>
-<div class="w" style="--b:var(--violet-soft)"><span class="ic"><span>✏️</span></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p></div>
-<div class="w" style="--b:var(--coral-soft)"><span class="ic"><span>🎉</span></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p></div>
+<div class="w" style="--b:var(--drop-soft)"><span class="ic" style="--c:var(--drop-d)"><svg class="ico" aria-hidden="true"><use href="#i-move"/></svg></span><h3>Hareket eğitimi</h3><p>Denge, koordinasyon ve beden farkındalığı için düzenli hareket saatleri.</p></div>
+<div class="w" style="--b:var(--orange-soft)"><span class="ic" style="--c:#b2601c"><svg class="ico" aria-hidden="true"><use href="#i-clay"/></svg></span><h3>Heykel ve sanat</h3><p>Kil, doğal malzemeler ve boya. Elleriyle düşünen çocuklar.</p></div>
+<div class="w" style="--b:var(--violet-soft)"><span class="ic" style="--c:#1f7a6f"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span><h3>İlkokula hazırlık</h3><p>Dikkat, kalem tutma, sesler ve sayılarla okula hazır bir başlangıç.</p></div>
+<div class="w" style="--b:var(--coral-soft)"><span class="ic" style="--c:var(--coral-d)"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span><h3>Özel günler</h3><p>Bayramlar, belirli gün ve haftalar. Değerleri yaşayarak öğreniyoruz.</p></div>
 </div></div></section>
 
 <section class="taste" id="lezzet"><div class="wrap tg">
-<div><p class="eb" style="color:#2f8a3f">Lezzet atölyesi</p><h2>Mutfakta da öğreniyoruz</h2><p class="s">Turşu kuruyoruz, meyve tabakları hazırlıyoruz, sofrayı birlikte kuruyoruz. Çocuk hazırlamasına yardım ettiği yemeği daha seve seve yer. Mutfağımızda yemekler her gün doğal malzemelerle hazırlanır.</p></div>
+<div><h2>Mutfakta da öğreniyoruz</h2><p class="s">Turşu kuruyoruz, meyve tabakları hazırlıyoruz, sofrayı birlikte kuruyoruz. Çocuk hazırlamasına yardım ettiği yemeği daha seve seve yer. Mutfağımızda yemekler her gün doğal malzemelerle hazırlanır.</p></div>
 <div class="jar"><p style="text-align:center;font-weight:800">Minik Damlalar turşusunu birlikte kuralım! Malzemeleri kavanoza ekleyin:</p>
 <svg viewBox="0 0 200 220" aria-hidden="true"><rect x="58" y="10" width="84" height="22" rx="6" fill="#c9a77c"/><path d="M50 40h100v150a20 20 0 0 1-20 20H70a20 20 0 0 1-20-20z" fill="#e8f5fb" stroke="#bcdde9" stroke-width="4"/><g id="jfill"></g><rect x="56" y="120" width="88" height="40" rx="6" fill="#fff" stroke="#e8524a" stroke-width="2"/><text x="100" y="138" text-anchor="middle" font-size="10" font-weight="800" fill="#e8524a" font-family="Figtree,sans-serif">MİNİK DAMLALAR</text><text x="100" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#2b2d42" font-family="Figtree,sans-serif">TURŞUSU</text></svg>
 <div class="jbtns" id="jbtns" role="group" aria-label="Turşu malzemeleri"></div>
@@ -268,7 +286,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><p class="eb">Neden Minik Damlalar?</p><h2>Velilerimizin en çok sevdiği üç şey</h2></div>
+<div class="head"><h2>Velilerimizin en çok sevdiği üç şey</h2></div>
 <div class="why">
 <div class="wy" style="--b:var(--drop-soft)"><h3>Kalabalık olmayan sınıflar</h3><p>Her çocuk birbirini, her öğretmen her çocuğu tanır. Farklı yaş gruplarıyla da kaynaşırlar.</p></div>
 <div class="wy" style="--b:var(--green-soft)"><h3>Doğal ve özenli mutfak</h3><p>Yemekler her gün okulda, doğal malzemelerle hazırlanır.</p></div>
@@ -276,7 +294,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </div></div></section>
 
 <section style="padding-top:0"><div class="wrap dayg">
-<div><p class="eb">Bir günümüz</p><h2 style="font-size:clamp(2.1rem,4.8vw,3.2rem);margin-top:10px">07.30'dan 18.45'e</h2>
+<div><h2 style="font-size:clamp(2.1rem,4.8vw,3.2rem)">Bir gün: 07.30'dan 18.45'e</h2><p style="color:var(--muted);margin-top:10px">Örnek bir gün akışı. <span class="ph">Okulun kendi programıyla güncellenecek</span></p>
 <ol class="tl">
 <li><time class="num">07.30</time><div><b>Günaydın!</b><span>Karşılama ve serbest oyun.</span></div></li>
 <li><time class="num">08.45</time><div><b>Kahvaltı</b><span>Birlikte sofraya oturuyoruz.</span></div></li>
@@ -290,14 +308,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <li><time class="num">18.45</time><div><b>Eve dönüş</b><span>Günün özeti veliyle paylaşılır.</span></div></li>
 </ol></div>
 <div style="display:grid;gap:20px">
-<div class="box a"><p class="eb">Uyum süreci</p><h3>İlk günler adım adım</h3>
+<div class="box a"><h3>Uyum süreci: ilk günler adım adım</h3>
 <ol class="steps">
 <li><p><b>Birlikte tanışma</b><span>İlk gün siz de yanındasınız.</span></p></li>
 <li><p><b>Kısa ayrılıklar</b><span>Süre her gün biraz uzar. Vedalaşmak önemli.</span></p></li>
 <li><p><b>İlk yemek ve uyku</b><span>Çocuğunuz hazır olduğunda okulda dener.</span></p></li>
 <li><p><b>Tam gün</b><span>Her adımı sizinle konuşuruz.</span></p></li>
 </ol></div>
-<div class="box g"><p class="eb" style="color:#2f8a3f">Kayıt için</p><h3>Hazırlamanız gerekenler</h3>
+<div class="box g"><h3>Kayıt için hazırlamanız gerekenler</h3>
 <p class="dc" id="dc" aria-live="polite"></p>
 <ul class="docs" id="docs"></ul>
 <p style="font-size:14px;color:var(--muted)">İşaretledikleriniz yalnızca bu sayfada kalır.</p></div>
@@ -305,20 +323,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-<div class="head"><p class="eb">Sık sorulanlar</p><h2>Veliler soruyor</h2></div>
+<div class="head"><h2>Veliler soruyor</h2></div>
 <div class="faq">
 <details open><summary>Kaç yaşındaki çocukları alıyorsunuz?</summary><p>2–6 yaş arası çocuklar için tam gün kreş ve gündüz bakımevi programımız var. 12–36 ay arası minikler için ayrıca oyun grubu atölyelerimiz düzenleniyor.</p></details>
-<details><summary>Oyun grubu tam gün okuldan farkı ne?</summary><p>Oyun grupları kısa süreli, küçük gruplarla yapılan atölyelerdir. Çocuğunuz okula başlamadan önce sosyalleşir, okul ortamına alışır. <span class="ph">Gün ve saat bilgisi eklenecek</span></p></details>
+<details><summary>Oyun grubu tam gün okuldan farkı ne?</summary><p>Oyun grupları kısa süreli, küçük gruplarla yapılan atölyelerdir. Çocuğunuz okula başlamadan önce sosyalleşir, okul ortamına alışır. Grupların gün ve saatleri dönem dönem belirlenir; güncel program için bize yazmanız yeterli.</p></details>
 <details><summary>Kayıtlarınız devam ediyor mu?</summary><p>Evet, 2–6 yaş arası kayıtlarımız devam ediyor. Kontenjan için bizi arayın ya da ön kayıt formunu doldurun.</p></details>
 <details><summary>Yemekler nasıl hazırlanıyor?</summary><p>Kahvaltı, öğle yemeği ve ara öğün mutfağımızda her gün doğal malzemelerle hazırlanır. Alerjisi olan çocuklar için ayrı tabak hazırlanır.</p></details>
-<details><summary>Servis hizmetiniz var mı?</summary><p><span class="ph">Servis bilgisi eklenecek</span></p></details>
+<details><summary>Servis hizmetiniz var mı?</summary><p>Ulaşım ve servis seçenekleri için bizi arayabilir ya da ön kayıt formundan sorabilirsiniz.</p></details>
 </div></div></section>
 
 <section class="contact" id="iletisim"><div class="wrap cg">
-<div><p class="eb">Ön kayıt ve okul gezisi</p><h2>Minik damlanız için <span>bir yer</span> ayıralım</h2><p class="s">Formu doldurun, size dönelim. Okul gezisi yaklaşık yarım saat sürer; çocuğunuzla birlikte gelebilirsiniz.</p>
+<div><h2>Minik damlanız için <span>bir yer</span> ayıralım</h2><p class="s">Formu doldurun, size dönelim. Okul gezisi yaklaşık yarım saat sürer; çocuğunuzla birlikte gelebilirsiniz.</p>
 <div class="info">
 <div><span>Adres</span><b>Aydınlar Mah. İğde Cd. No:9/A, Sokullu / Dikmen, Çankaya · <a href="https://www.google.com/maps/search/?api=1&amp;query=39.881188%2C32.835802" target="_blank" rel="noopener">Haritada aç</a></b></div>
-<div><span>Telefon</span><b class="num">0541 322 77 14</b></div>
+<div><span>Telefon</span><b class="num"><a href="tel:+905413227714">0541 322 77 14</a></b></div>
 <div><span>Saatler</span><b>Hafta içi 07.30–18.45</b></div>
 <div><span>Instagram</span><b><a href="https://www.instagram.com/minikdamlalarkres/" target="_blank" rel="noopener">@minikdamlalarkres</a></b></div>
 </div></div>
@@ -346,7 +364,7 @@ var now=new Date();
 // growth slider
 var GR={12:[['İlk adımlarını atar','Basit sözcükler söyler','Nesneleri kaba koyup çıkarır'],['Oyun grubu: duyusal oyun keşifleri','Taklit oyunları ve parmak oyunları','Ebeveynle birlikte kısa oturumlar'],'Oyun grubu · 12–36 ay','var(--yellow-soft)','#9a6a00'],
 18:[['Koşmaya ve tırmanmaya başlar','Karalama yapar','"Ben" demeye başlar'],['Oyun grubu: grup oyunları','İnce motor: kaşıkla aktarma, takma oyunları','Müzik ve hareket'],'Oyun grubu · 12–36 ay','var(--yellow-soft)','#9a6a00'],
-24:[['İki kelimelik cümleler kurar','Kendi başına yemeye çalışır','Yaşıtlarının yanında oynar'],['Tam gün programa başlangıç','Tuvalet eğitimi desteği','Duyusal oyun ve Montessori köşesi'],'Kreş ve gündüz bakımevi + oyun grubu','var(--orange-soft)','#b2601c'],
+24:[['İki kelimelik cümleler kurar','Kendi başına yemeye çalışır','Yaşıtlarının yanında oynar'],['Tam gün programa başlangıç','Öz bakım becerilerinde destek','Duyusal oyun ve Montessori köşesi'],'Kreş ve gündüz bakımevi + oyun grubu','var(--orange-soft)','#b2601c'],
 30:[['"Neden?" sorusu başlar','Renkleri fark eder','Sıra beklemeyi öğrenir'],['Kendi başına giyinme ve yemek','Sanat ve müzik atölyeleri','Paylaşma oyunları'],'Kreş ve gündüz bakımevi + oyun grubu','var(--orange-soft)','#b2601c'],
 36:[['Arkadaşlarıyla oyun kurar','Kısa hikâyeler anlatır','Makas tutmayı dener'],['Hikâye saati ve drama','Hareket eğitimi','Lezzet atölyesi'],'Kreş ve gündüz bakımevi','var(--coral-soft)','var(--coral-d)'],
 42:[['Daire çizer','Basit kuralları takip eder','Duygularını sözle anlatır'],['Heykel ve sanat etkinlikleri','Kavramlar: büyük-küçük, uzun-kısa','Özel gün kutlamaları'],'Kreş ve gündüz bakımevi','var(--coral-soft)','var(--coral-d)'],
@@ -367,7 +385,7 @@ var J=[['Salatalık','#58b368'],['Havuç','#f29a3e'],['Lahana','#c8e6a0'],['Bibe
 var jb=$('jbtns'),jf=$('jfill');
 J.forEach(function(j,i){var b=document.createElement('button');b.type='button';b.textContent=j[0];b.setAttribute('aria-pressed','false');b.onclick=function(){if(added[i])return;added[i]=1;b.setAttribute('aria-pressed','true');
  for(var k=0;k<5;k++){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');var n=Object.keys(added).length;c.setAttribute('cx',62+Math.random()*76);c.setAttribute('cy',196-n*26+Math.random()*20);c.setAttribute('r',7+Math.random()*5);c.setAttribute('fill',j[1]);c.setAttribute('stroke','rgba(0,0,0,.08)');jf.appendChild(c)}
- var n2=Object.keys(added).length;$('jmsg').textContent=n2===J.length?'Afiyet olsun! Turşumuz iki hafta sonra hazır 🥒':n2+' / '+J.length+' malzeme eklendi'};jb.appendChild(b)});
+ var n2=Object.keys(added).length;$('jmsg').textContent=n2===J.length?'Afiyet olsun! Turşumuz iki hafta sonra hazır.':n2+' / '+J.length+' malzeme eklendi'};jb.appendChild(b)});
 
 // docs
 var DOCS=['Çocuğun nüfus cüzdanı fotokopisi','Veli kimlik fotokopileri','Aşı kartı fotokopisi','Sağlık raporu (toplu yaşama uygundur)','4 adet vesikalık fotoğraf','Çocuğu teslim alacak kişilerin listesi'];
